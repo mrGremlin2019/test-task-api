@@ -23,3 +23,14 @@ def test_create_product():
     response = client.post("/products/", json=product_data)
     assert response.status_code == 201
     assert response.json()["name"] == "Test Product"
+
+
+def test_update_product():
+    product_data = {
+        "name": "Updated Product",
+        "price": 150,
+        "category": "Updated Category"
+    }
+    response = client.put("/products/0", json=product_data)
+    assert response.status_code == 200
+    assert response.json()["name"] == "Updated Product"
